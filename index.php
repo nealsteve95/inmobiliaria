@@ -4,11 +4,11 @@ include('adicional/encabezado.php');
 ?>
 
 <!-- vinculo para la conexion general a la base de datos -->
-<?php 
+<?php
 include("modelo/conexion.php");
-echo "Se realizo la conexion correctamente"; 
+//echo "Se realizo la conexion correctamente";
 // Al ingresar mostrara automaticamente toda la base de datos registrada
-$sentencia = $bd -> query("select * from registro");
+$sentencia = $bd->query("select * from registro");
 // El nombre de la variable debe ser el mismo de la tabla, por eso se llama registro
 $registro = $sentencia->fetchAll(PDO::FETCH_OBJ);
 ?>
@@ -20,65 +20,65 @@ $registro = $sentencia->fetchAll(PDO::FETCH_OBJ);
             <!-- inicio alerta -->
 
             <!-- Para el mensaje de error si colocas un dato numerico dentro del varchar se activa esta parte del algoritmo -->
-            <?php 
-                if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'falta'){
+            <?php
+            if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'falta') {
             ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error!</strong> Rellena todos los campos.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php 
-                }
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> Rellena todos los campos.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+            }
             ?>
             <!-- Para el mensaje de error -->
 
             <!-- Cuando se registraron los datos -->
-            <?php 
-                if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'registrado'){
+            <?php
+            if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'registrado') {
             ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Registrado!</strong> Se agregaron los datos.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php 
-                }
-            ?>   
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Registrado!</strong> Se agregaron los datos.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+            }
+            ?>
             <!-- Cuando se registraron los datos -->
-            
 
-            <?php 
-                if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'error'){
-            ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error!</strong> Vuelve a intentar.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php 
-                }
-            ?>   
 
-            <?php 
-                if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'editado'){
+            <?php
+            if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'error') {
             ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Cambiado!</strong> Los datos fueron actualizados.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php 
-                }
-            ?> 
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> Vuelve a intentar.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+            }
+            ?>
 
-            <!-- habria que evaluar el condicional -->       
-            <?php 
-                if(isset($_GET['mensaje']) and $_GET['mensaje'] == 'eliminado'){
+            <?php
+            if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'editado') {
             ?>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Eliminado!</strong> Los datos fueron borrados.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php 
-                }
-            ?> 
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Cambiado!</strong> Los datos fueron actualizados.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+            }
+            ?>
+
+            <!-- habria que evaluar el condicional -->
+            <?php
+            if (isset($_GET['mensaje']) and $_GET['mensaje'] == 'eliminado') {
+            ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Eliminado!</strong> Los datos fueron borrados.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+            }
+            ?>
 
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -109,15 +109,18 @@ $registro = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
             <!-- fin alerta -->
             <!-- Card igual tarjeta -->
-            <div class="card">
-                <div class="card-header">
-                    Lista de propiedades
-                </div>
-                <div class="p-4">
+            <div class="card mt-2">
+                <div class="table-responsive">
+
+                    <h4 class="card-header p-2 text-center">
+                        Lista de propiedades
+                    </h4>
+
                     <!-- Como mover a la izquierda-->
                     <!-- Columnas de la tabla-->
-                    <table class="table align-middle">
-                        <thead>
+
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead class="table-dark">
                             <tr>
                                 <th scope="col">#id</th>
                                 <th scope="col">nro_partida</th>
@@ -135,10 +138,12 @@ $registro = $sentencia->fetchAll(PDO::FETCH_OBJ);
                         </thead>
                         <tbody>
                             <!-- Recorre cada elemento de la tabla para eso es el foreach-->
-                            <?php 
-                                foreach($registro as $dato){ 
+                            <?php
+                            foreach ($registro as $dato) {
                             ?>
-                           
+
+
+                        <tbody>
                             <tr>
                                 <td scope="row"><?php echo $dato->id; ?></td>
                                 <td><?php echo $dato->nro_partida; ?></td>
@@ -149,28 +154,40 @@ $registro = $sentencia->fetchAll(PDO::FETCH_OBJ);
                                 <td><?php echo $dato->nro_habitaciones; ?></td>
                                 <td><?php echo $dato->nro_baños; ?></td>
                                 <td><?php echo $dato->fecha_construccion; ?></td>
-                                <td><?php echo $dato->nombre_agente_inmo; ?></td>        
+                                <td><?php echo $dato->nombre_agente_inmo; ?></td>
                                 <td><?php echo $dato->comentario; ?></td>
-                            <!-- La razon por la que imprime no se cambiar la referencia es porque tiene el mismo nombre de nuestros archivos-->
+                                <!-- La razon por la que imprime no se cambiar la referencia es porque tiene el mismo nombre de nuestros archivos-->
                                 <td><a class="text-success" href="editar.php?codigo=<?php echo $dato->id; ?>"><i class="bi bi-pencil-square"></i></a></td>
                                 <td><a onclick="return confirm('Estas seguro de eliminar?');" class="text-danger" href="eliminar.php?id=<?php echo $dato->id; ?>"><i class="bi bi-trash"></i></a></td>
                             </tr>
-
-                            <?php 
-                                }
-                            ?>
-
                         </tbody>
+                    <?php
+                            }
+                    ?>
+                    </tbody>
                     </table>
-                    
+                    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <?php
+                                    include('editar.php');
+                                    ?>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
+        <!-- Fin de la tarjeta que contiene la tabla de los datos-->
+
     </div>
 </div>
-
-
-
-
-
