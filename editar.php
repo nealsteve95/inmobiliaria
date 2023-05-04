@@ -1,5 +1,5 @@
 <?php include('adicional/encabezado.php') ?>
-
+<!--fefwedsdfdf-->
 <?php
     if(!isset($_GET['codigo'])){
         header('Location: index.php?mensaje=error');
