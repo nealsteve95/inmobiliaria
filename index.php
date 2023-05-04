@@ -80,6 +80,33 @@ $registro = $sentencia->fetchAll(PDO::FETCH_OBJ);
                 }
             ?> 
 
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Registrar Propiedad
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">REGISTRO</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <?php
+                            include('Componentes/registro.php');
+                            ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <!-- fin alerta -->
             <!-- Card igual tarjeta -->
             <div class="card">
@@ -139,62 +166,7 @@ $registro = $sentencia->fetchAll(PDO::FETCH_OBJ);
                 </div>
             </div>
         </div>
-        <!-- Fin de la tarjeta que contiene la tabla de los datos-->
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-header">
-                    Registrar datos de propiedades:
-                </div>
-                <form class="p-4" method="POST" action="registrar.php">
-                    <div class="mb-3">
-                        <label class="form-label">N° de partida: </label>
-                        <input type="text" class="form-control" name="txtnropartida" autofocus required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Dirección: </label>
-                        <input type="text" class="form-control" name="txtdireccion" autofocus required>
-                    </div>
-                    <!-- el primer cambio del registro de datos-->
-                    <div class="mb-3">
-                        <label class="form-label">Precio de Venta: </label>
-                        <input type="number" class="form-control" name="txtprecioventa" autofocus required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Tipo de propiedad: </label>
-                        <input type="text" class="form-control" name="txttipopropiedad" autofocus required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Tamaño M2: </label>
-                        <input type="number" class="form-control" name="txttamaño_cuadrados" autofocus required>
-                    </div>
-                    <!-- Al colocar el number aparece esa barrita para aumentar y quitar-->
-                    <div class="mb-3">
-                        <label class="form-label">N° Habitaciones: </label>
-                        <input type="number" class="form-control" name="txtnrohabitaciones" autofocus required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">N° Baños: </label>
-                        <input type="number" class="form-control" name="txtnrobaños" autofocus required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Fecha construcción: </label>
-                        <input type="date" class="form-control" name="txtfechaconstruccion" autofocus required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Nombre Agente: </label>
-                        <input type="text" class="form-control" name="txtnombreagente" autofocus required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Comentario : </label>
-                        <input type="text" class="form-control" name="txtcomentario" autofocus required>
-                    </div>
-                    <div class="d-grid">
-                        <input type="hidden" name="oculto" value="1">
-                        <input type="submit" class="btn btn-primary" value="Registrar">
-                    </div>
-                </form>
-            </div>
-        </div>
+        
     </div>
 </div>
 
